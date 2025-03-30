@@ -7,7 +7,7 @@ namespace ToDoApi.Controllers;
 [Route("api/[controller]")]
 public class TaskController : ControllerBase
 {
-   private List<TaskModel> Tasks = new List<TaskModel>
+   private static List<TaskModel> Tasks = new List<TaskModel>
    {
       new TaskModel
       {
@@ -47,7 +47,7 @@ public class TaskController : ControllerBase
    public IActionResult AddTask([FromBody] TaskModel task)
    {
       Tasks.Add(task);
-      return Ok(task);
+      return Ok(new { message = "Task creado", Tasks});
    }
    
 }
