@@ -1,0 +1,33 @@
+bin/
+obj/
+/packages/
+riderModule.iml
+/_ReSharper.Caches/
+*.dll
+*.exe
+*.pdb
+*.log
+
+# Archivos de Rider y JetBrains
+.idea/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+.vscode/
+
+# Archivos de dependencias y configuración
+wwwroot/
+.env
+appsettings*.json
+
+# Caché y paquetes
+**/packages/
+**/project.lock.json
+**/project.assets.json
+
+# Archivos generados por dotnet
+*.csproj.user
+*.db
+*.bak
+logs/
