@@ -8,5 +8,8 @@ namespace ToDoApi.Controllers;
 public class TaskController : ControllerBase
 {
    private List<TaskModel> Tasks = new List<TaskModel>();
+      
+   [HttpGet]
+   public IActionResult GetAll() => Ok(Tasks);
 
 }
