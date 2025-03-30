@@ -63,4 +63,8 @@
       <Folder Include="wwwroot\lib\" />
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="Swashbuckle.AspNetCore" Version="8.0.0" />
+    </ItemGroup>
+
 </Project>
