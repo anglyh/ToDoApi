@@ -43,4 +43,11 @@ public class TaskController : ControllerBase
       return Ok(Tasks[index]);
    }
    
+   [HttpPost]
+   public IActionResult AddTask([FromBody] TaskModel task)
+   {
+      Tasks.Add(task);
+      return Ok(task);
+   }
+   
 }
