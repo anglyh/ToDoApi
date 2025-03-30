@@ -61,5 +61,29 @@ public class TaskController : ControllerBase
       taskFound.Status = task.Status;
       return Ok(Tasks);
    }
+   
+   // PATCH - uso de DTO
+   [HttpPatch("{id}")]
+   public IActionResult Patch([FromRoute] int id, [FromBody] TaslModelPatchDTO updates)
+   {
+      var task = Tasks.FirstOrDefault(t => t.Id == id);
+      if (task == null)
+         return NotFound(new { message = "Task not found" });
+      
+      if (updates.Status != null)
+         task.Status = updates.Status;
+      
+      return Ok(new { message = "Task patched", task });
+   }
+   
+   [HttpDelete("{id}")]
+   public IActionResult Delete([FromRoute] int id)
+   {
+      var task = Tasks.FirstOrDefault(t => t.Id == id);
+      if (task == null)
+         return NotFound(new { message = "Task not found" });
+      Tasks.Remove(task);
+      return Ok(new { message = "Task removed", Tasks });
+   }
 
 }
