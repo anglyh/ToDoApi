@@ -9,4 +9,11 @@ public class TaskController : ControllerBase
 {
    private List<TaskModel> Tasks = new List<TaskModel>();
 
+   [HttpPost]
+   public IActionResult AddTask([FromBody] TaskModel task)
+   {
+      Tasks.Add(task);
+      return Ok(task);
+   }
+
 }
