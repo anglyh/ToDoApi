@@ -4,7 +4,7 @@ using ToDoApi.Models;
 namespace ToDoApi.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("api/tasks")]
 public class TaskController : ControllerBase
 {
    private static List<TaskModel> Tasks = new List<TaskModel>
@@ -12,19 +12,19 @@ public class TaskController : ControllerBase
       new TaskModel
       {
          Id = 1,
-         Title = "Revisar correos",
+         Title = "Check emails",
          Status = "pending"
       },
       new TaskModel
       {
          Id = 2,
-         Title = "Terminar reporte",
+         Title = "Finish laboratory report",
          Status = "pending"
       },
       new TaskModel
       {
          Id = 3,
-         Title = "Enviar documentación",
+         Title = "Send documentation",
          Status = "completed"
       }
    };
@@ -32,22 +32,24 @@ public class TaskController : ControllerBase
    [HttpGet]
    public IActionResult GetAll()
    {
-      if (Tasks.Count == 0) return NotFound(new {message = "Sin datos para mostrar"});
+      if (Tasks.Count == 0) return NotFound(new {message = "No task data found"});
       return Ok(Tasks);
    }
 
-   [HttpGet("{index}")]
-   public IActionResult GetById(int index)
+   [HttpGet("{id}")]
+   public IActionResult GetById(int id)
    {
-      if (index < 0 || index >= Tasks.Count) return NotFound(new {message = "Indice fuera de rango"});
-      return Ok(Tasks[index]);
+      var task = Tasks.FirstOrDefault(t => t.Id == id);
+      if (task == null)
+         return NotFound(new { message = "Task not found" });
+      return Ok(task);
    }
    
    [HttpPost]
    public IActionResult AddTask([FromBody] TaskModel task)
    {
       Tasks.Add(task);
-      return Ok(new { message = "Task creado", Tasks});
+      return Ok(new { message = "Task created", Tasks});
    }
 
    [HttpPut("{id}")]
@@ -64,7 +66,7 @@ public class TaskController : ControllerBase
    
    // PATCH - uso de DTO
    [HttpPatch("{id}")]
-   public IActionResult Patch([FromRoute] int id, [FromBody] TaslModelPatchDTO updates)
+   public IActionResult Patch([FromRoute] int id, [FromBody] TaskModelPatchDTO updates)
    {
       var task = Tasks.FirstOrDefault(t => t.Id == id);
       if (task == null)

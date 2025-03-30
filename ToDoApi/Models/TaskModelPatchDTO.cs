@@ -1,6 +1,6 @@
 namespace ToDoApi.Models;
 
-public class TaslModelPatchDTO
+public class TaskModelPatchDTO
 {
     public string Status { get; set; }
 }
