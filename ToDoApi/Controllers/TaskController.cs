@@ -1,31 +1,12 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using ToDoApi.Models;
-
 namespace ToDoApi.Controllers;
 
-public class TaskController : Controller
+[ApiController]
+[Route("api/[controller]")]
+public class TaskController : ControllerBase
 {
-    private readonly ILogger<TaskController> _logger;
+   private List<TaskModel> Tasks = new List<TaskModel>();
 
-    public TaskController(ILogger<TaskController> logger)
-    {
-        _logger = logger;
-    }
-
-    public IActionResult Index()
-    {
-        return View();
-    }
-
-    public IActionResult Privacy()
-    {
-        return View();
-    }
-
-    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-    public IActionResult Error()
-    {
-        return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-    }
 }
